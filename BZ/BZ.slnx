@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="BZ/BZ.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+  <Project Path="DataAccess/DataAccess.csproj" />
+  <Project Path="Domain/Domain.csproj" />
+</Solution>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:Domain.Models;assembly=Domain"
+             xmlns:vm="clr-namespace:BZ.ViewModels;assembly=BZ"
+             x:DataType="vm:ProcedurePageViewModel"
+             x:Class="BZ.Pages.ProcedurePage"
+             Title="ProcedurePage">
+    <Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ListView Grid.Row="1" ItemsSource="{Binding Procedures}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Procedure">
+                        <ViewCell>
+                            <Frame Margin="8" Padding="12">
+                                <VerticalStackLayout Spacing="4">
+                                    <HorizontalStackLayout>
+                                        <Label FontAttributes="Bold" TextColor="White" Text="{Binding Name}"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout Margin="5,10,5,5">
+                                        <Button TextColor="White" Text="Изменить"/>
+                                        <Button TextColor="White" Text="Удалить"/>
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Border>
+</ContentPage>
