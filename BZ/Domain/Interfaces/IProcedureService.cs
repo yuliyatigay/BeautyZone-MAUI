@@ -8,5 +8,8 @@ namespace Domain.Interfaces;
 
 public interface IProcedureService
 {
-    Task<ObservableCollection<Procedure>> GetAllProcedures();
+    Task<ObservableCollection<Procedure>> GetAllProcedures(bool forceRefresh = false);
+    Task Delete(Guid id);
+    Task<Procedure?> CreateProcedure(string procedureName);
+    Task<bool> UpdateProcedure(Procedure procedure);
 }

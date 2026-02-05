@@ -1,5 +1,6 @@
 using BZ.ViewModels;
 using Domain.Interfaces;
+using System.ComponentModel;
 
 namespace BZ.Pages;
 
@@ -15,6 +16,6 @@ public partial class ProcedurePage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await viewModel.LoadProcedures();
+        await ((ProcedurePageViewModel)BindingContext).LoadProcedures();
     }
 }

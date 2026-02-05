@@ -4,11 +4,13 @@
              xmlns:vm="clr-namespace:BZ.ViewModels;assembly=BZ"
              x:DataType="vm:LoginPageViewModel"
              x:Class="BZ.Pages.LoginPage"
-             Title="LoginPage">
-    <VerticalStackLayout>
-        <Label Text="Введите данные для авторизации" HorizontalTextAlignment="Center" Margin="0,5"/>
-        <Entry Text="{Binding Email}" Placeholder="Email"/>
-        <Entry Text="{Binding Password}" Placeholder="Password" IsPassword="True" Margin="0,0,0,30"/>
-        <Button Text="Войти" Command="{Binding LoginCommand}"/>
+             Title="Авторизация"
+             Shell.BackgroundColor="#1D1616"
+             Shell.TitleColor="#D3DAD9">
+    <VerticalStackLayout Padding="30" Spacing="10" BackgroundColor="#1D1616">
+        <Label TextColor="#D3DAD9" Text="Введите данные для авторизации" HorizontalTextAlignment="Center" Margin="0,5"/>
+        <Entry TextColor="White" BackgroundColor="#44444E" Text="{Binding Email}" Placeholder="Email"/>
+        <Entry TextColor="White" BackgroundColor="#44444E" Text="{Binding Password}" Placeholder="Password" IsPassword="True" Margin="0,0,0,30"/>
+        <Button TextColor="White" BackgroundColor="#CC561E" Text="Войти" Command="{Binding LoginCommand}"/>
     </VerticalStackLayout>
 </ContentPage>

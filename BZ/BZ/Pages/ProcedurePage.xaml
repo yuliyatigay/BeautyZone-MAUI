@@ -1,37 +1,83 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
              xmlns:model="clr-namespace:Domain.Models;assembly=Domain"
              xmlns:vm="clr-namespace:BZ.ViewModels;assembly=BZ"
              x:DataType="vm:ProcedurePageViewModel"
              x:Class="BZ.Pages.ProcedurePage"
-             Title="ProcedurePage">
-    <Border>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+             Title="Процедуры"
+             Shell.BackgroundColor="#1D1616"
+             Shell.TitleColor="#D3DAD9">
+   
+    <Grid BackgroundColor="#1D1616">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-            <ListView Grid.Row="1" ItemsSource="{Binding Procedures}">
-                <ListView.ItemTemplate>
+        <!-- Кнопка Создать -->
+        <FlexLayout Grid.Row="0">
+            <HorizontalStackLayout Margin="2" Spacing="5">
+                <Button Text="Создать"
+                    BackgroundColor="#3F4F44"
+                    Command="{Binding GoToCreateProcedureCommand}"/>
+            </HorizontalStackLayout>
+        </FlexLayout>
+
+        <!-- Список + pull-to-refresh -->
+        <RefreshView Grid.Row="1"
+                 IsRefreshing="{Binding IsRefreshing}"
+                 Command="{Binding RefreshCommand}">
+            <CollectionView BackgroundColor="#1D1616" 
+    Grid.Row="1" ItemsSource="{Binding Procedures}">
+                <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Procedure">
-                        <ViewCell>
-                            <Frame Margin="8" Padding="12">
-                                <VerticalStackLayout Spacing="4">
-                                    <HorizontalStackLayout>
-                                        <Label FontAttributes="Bold" TextColor="White" Text="{Binding Name}"/>
-                                    </HorizontalStackLayout>
-                                    <HorizontalStackLayout Margin="5,10,5,5">
-                                        <Button TextColor="White" Text="Изменить"/>
-                                        <Button TextColor="White" Text="Удалить"/>
-                                    </HorizontalStackLayout>
-                                </VerticalStackLayout>
-                            </Frame>
-                        </ViewCell>
+                        <SwipeView ios:SwipeView.SwipeTransitionMode="Reveal">
+                            <SwipeView.RightItems>
+                                <SwipeItems SwipeBehaviorOnInvoked="Close">
+                                    <SwipeItemView>
+                                        <Frame BackgroundColor="Transparent" WidthRequest="80">
+                                            <Button Background="Red" HorizontalOptions="Center" 
+                                        VerticalOptions="Center" ImageSource="trash_icon.png"
+                                        CornerRadius="10" WidthRequest="80" HeightRequest="20" Padding="0"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProcedurePageViewModel}}, 
+                                        Path=DeleteCommand}" CommandParameter="{Binding Id}"/>
+                                        </Frame>
+                                    </SwipeItemView>
+                                    <SwipeItemView>
+                                        <Frame BackgroundColor="Transparent" WidthRequest="80">
+                                            <Button Background="DarkSlateBlue" HorizontalOptions="Center" VerticalOptions="Center"
+                                        ImageSource="pencil_icon.png"
+                                        CornerRadius="10" WidthRequest="80" HeightRequest="20" Padding="0"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProcedurePageViewModel}}, 
+                                        Path=GoToEditProcedureCommand}" CommandParameter="{Binding .}"/>
+                                        </Frame>
+                                    </SwipeItemView>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <FlexLayout>
+                                <Label BackgroundColor="Transparent" FontAttributes="Bold"  
+                           TextColor="White" Padding="10" x:Name="procedure"
+                           Text="{Binding Name}"/>
+                            </FlexLayout>
+                        </SwipeView>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <!-- Overlay loader (центр экрана) -->
+        <Grid Grid.RowSpan="2"
+          IsVisible="{Binding IsLoading}"
+          BackgroundColor="#80000000"
+          InputTransparent="False">
+
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                           IsVisible="{Binding IsLoading}"
+                           HorizontalOptions="Center" VerticalOptions="Center"
+                           WidthRequest="48" HeightRequest="48" Color="Gray"/>
         </Grid>
-    </Border>
+    </Grid>
+
 </ContentPage>

@@ -4,11 +4,13 @@
              xmlns:vm="clr-namespace:BZ.ViewModels;assembly=BZ"
              x:Class="BZ.Pages.HomePage"
              x:DataType="vm:HomePageViewModel"
-             Title="Главная">
-    <VerticalStackLayout Padding="30,0" Spacing="25">
+             Title="Главная"
+             Shell.BackgroundColor="#1D1616"
+             Shell.TitleColor="#D3DAD9">
+    <VerticalStackLayout Margin="2" Padding="30" Spacing="25" BackgroundColor="#1D1616">
         <Label Text="Админ Панель" FontSize="32" HorizontalOptions="Center" IsVisible="{Binding IsAdmin}"/>
-        <Button Text="Процедуры" Command="{Binding NavigateToProceduresPageCommand}"/>
-        <Button Text="Выйти" Command="{Binding Source={RelativeSource  AncestorType={x:Type vm:HomePageViewModel}}, Path=LogoutCommand}"/>
+        <Button BackgroundColor="#44444E" TextColor="White" Text="Процедуры" Command="{Binding NavigateToProceduresPageCommand}"/>
+        <Button BackgroundColor="#44444E" TextColor="White" Text="Выйти" Command="{Binding Source={RelativeSource  AncestorType={x:Type vm:HomePageViewModel}}, Path=LogoutCommand}"/>
 
     </VerticalStackLayout>
 </ContentPage>

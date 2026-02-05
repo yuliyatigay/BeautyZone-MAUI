@@ -21,7 +21,7 @@ namespace BZ
 
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddTransient<AuthHeaderHandler>();
-            builder.Services.AddScoped<IProcedureService, ProcedureService>();
+            builder.Services.AddSingleton<IProcedureService, ProcedureService>();
 
             builder.Services.AddHttpClient("AppHttpClient", client =>
             {
@@ -36,10 +36,12 @@ namespace BZ
             builder.Services.AddScoped<LoginPageViewModel>();
             builder.Services.AddScoped<HomePageViewModel>();
             builder.Services.AddScoped<ProcedurePageViewModel>();
+            builder.Services.AddScoped<ProcedureFormViewModel>();
 
             builder.Services.AddTransient<HomePage>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<ProcedurePage>();
+            builder.Services.AddTransient<CreateProcedurePage>();
 
 #if DEBUG
             builder.Logging.AddDebug();

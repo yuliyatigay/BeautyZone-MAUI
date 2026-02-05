@@ -8,6 +8,7 @@
             Routing.RegisterRoute(nameof(Pages.LoginPage), typeof(Pages.LoginPage));
             Routing.RegisterRoute(nameof(Pages.HomePage), typeof(Pages.HomePage));
             Routing.RegisterRoute(nameof(Pages.ProcedurePage), typeof(Pages.ProcedurePage));
+            Routing.RegisterRoute(nameof(Pages.CreateProcedurePage), typeof(Pages.CreateProcedurePage));
         }
     }
 }
