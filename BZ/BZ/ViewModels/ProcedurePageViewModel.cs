@@ -12,20 +12,19 @@ namespace BZ.ViewModels;
 public partial class ProcedurePageViewModel : ObservableObject
 {
     private readonly IProcedureService _procedureService;
-    public Guid ProcedureId { get; set; }
 
     [ObservableProperty]
     private ObservableCollection<Procedure> procedures = new();
     [ObservableProperty]
     private bool isRefreshing;
+    [ObservableProperty]
+    private bool isLoading;
+
 
     public ProcedurePageViewModel(IProcedureService procedureService)
     {
         _procedureService = procedureService;
     }
-
-    [ObservableProperty]
-    private bool isLoading;
 
     public async Task LoadProcedures()
     {
@@ -60,7 +59,7 @@ public partial class ProcedurePageViewModel : ObservableObject
     [RelayCommand]
     public async Task GoToCreateProcedure()
     {
-        await Shell.Current.GoToAsync(nameof(CreateProcedurePage));
+        await Shell.Current.GoToAsync(nameof(ProcedureFormPage));
     }
 
     [RelayCommand]
@@ -84,6 +83,6 @@ public partial class ProcedurePageViewModel : ObservableObject
         {
                 { nameof(Procedure), procedure}
         };
-        await Shell.Current.GoToAsync(nameof(CreateProcedurePage), query);
+        await Shell.Current.GoToAsync(nameof(ProcedureFormPage), query);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BZ.Pages;
 using BZ.ViewModels;
+using CommunityToolkit.Maui;
 using DataAccess.Services;
 using Domain.Interfaces;
 using Microsoft.Extensions.Logging;
@@ -13,6 +14,7 @@ namespace BZ
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -22,6 +24,7 @@ namespace BZ
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddTransient<AuthHeaderHandler>();
             builder.Services.AddSingleton<IProcedureService, ProcedureService>();
+            builder.Services.AddSingleton<IBeautyTechService, BeautyTechService>();
 
             builder.Services.AddHttpClient("AppHttpClient", client =>
             {
@@ -32,16 +35,21 @@ namespace BZ
             {
                 client.BaseAddress = new Uri(Constants.BaseApiUrl);
             }).AddHttpMessageHandler<AuthHeaderHandler>();
+            
 
             builder.Services.AddScoped<LoginPageViewModel>();
             builder.Services.AddScoped<HomePageViewModel>();
             builder.Services.AddScoped<ProcedurePageViewModel>();
             builder.Services.AddScoped<ProcedureFormViewModel>();
+            builder.Services.AddScoped<BeautyTechViewModel>();
+            builder.Services.AddScoped<BeautyTechFormViewModel>();
 
             builder.Services.AddTransient<HomePage>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<ProcedurePage>();
-            builder.Services.AddTransient<CreateProcedurePage>();
+            builder.Services.AddTransient<ProcedureFormPage>();
+            builder.Services.AddTransient<BeautyTechsPage>();
+            builder.Services.AddTransient<BeautyTechFormPage>();
 
 #if DEBUG
             builder.Logging.AddDebug();

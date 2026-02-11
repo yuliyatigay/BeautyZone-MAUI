@@ -57,4 +57,16 @@ public partial class HomePageViewModel : ObservableObject
             Shell.Current.DisplayAlert("Navigation Error", ex.Message, "OK");
         }
     }
+    [RelayCommand]
+    private async Task NavigateToBeautyTechPage()
+    {
+        try
+        {
+            await Shell.Current.GoToAsync(nameof(BeautyTechsPage));
+        }
+        catch (Exception ex)
+        {
+            Shell.Current.DisplayAlert("Navigation Error", ex.Message, "OK");
+        }
+    }
 }

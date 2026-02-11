@@ -4,12 +4,12 @@
              xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
              xmlns:model="clr-namespace:Domain.Models;assembly=Domain"
              xmlns:vm="clr-namespace:BZ.ViewModels;assembly=BZ"
-             x:DataType="vm:ProcedurePageViewModel"
-             x:Class="BZ.Pages.ProcedurePage"
-             Title="Процедуры"
+             x:DataType="vm:BeautyTechViewModel"
+             x:Class="BZ.Pages.BeautyTechsPage"
+             Title="BeautyTechsPage"
              Shell.BackgroundColor="#1D1616"
              Shell.TitleColor="#D3DAD9">
-   
+
     <Grid BackgroundColor="#1D1616">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -18,48 +18,48 @@
 
         <!-- Кнопка Создать -->
         <FlexLayout Grid.Row="0">
-            <HorizontalStackLayout Margin="2" Spacing="5"> 
+            <HorizontalStackLayout Margin="2" Spacing="5">
                 <Button ImageSource="plus_icon_white.png" VerticalOptions="Center"
-                    BackgroundColor="#3F4F44" WidthRequest="60" HeightRequest="10"
-                    Command="{Binding GoToCreateProcedureCommand}"/>
+                BackgroundColor="#3F4F44" WidthRequest="60" HeightRequest="10"
+                Command="{Binding GoToCreateBeautyTechCommand}"/>
             </HorizontalStackLayout>
         </FlexLayout>
 
         <!-- Список + pull-to-refresh -->
         <RefreshView Grid.Row="1"
-                 IsRefreshing="{Binding IsRefreshing}"
-                 Command="{Binding RefreshCommand}">
+             IsRefreshing="{Binding IsRefreshing}"
+             Command="{Binding RefreshCommand}">
             <CollectionView BackgroundColor="#1D1616" 
-    Grid.Row="1" ItemsSource="{Binding Procedures}">
+Grid.Row="1" ItemsSource="{Binding BeautyTechs}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Procedure">
+                    <DataTemplate x:DataType="model:BeautyTech">
                         <SwipeView ios:SwipeView.SwipeTransitionMode="Reveal">
                             <SwipeView.RightItems>
                                 <SwipeItems SwipeBehaviorOnInvoked="Close">
                                     <SwipeItemView>
                                         <Frame BackgroundColor="Transparent" WidthRequest="80">
                                             <Button Background="Red" HorizontalOptions="Center" 
-                                        VerticalOptions="Center" ImageSource="trash_icon.png"
-                                        CornerRadius="10" WidthRequest="80" HeightRequest="20" Padding="0"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProcedurePageViewModel}}, 
-                                        Path=DeleteCommand}" CommandParameter="{Binding Id}"/>
+                                    VerticalOptions="Center" ImageSource="trash_icon.png"
+                                    CornerRadius="10" WidthRequest="80" HeightRequest="20" Padding="0"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:BeautyTechViewModel}}, 
+                                    Path=DeleteCommand}" CommandParameter="{Binding Id}"/>
                                         </Frame>
                                     </SwipeItemView>
                                     <SwipeItemView>
                                         <Frame BackgroundColor="Transparent" WidthRequest="80">
                                             <Button Background="DarkSlateBlue" HorizontalOptions="Center" VerticalOptions="Center"
-                                        ImageSource="pencil_icon.png"
-                                        CornerRadius="10" WidthRequest="80" HeightRequest="20" Padding="0"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProcedurePageViewModel}}, 
-                                        Path=GoToEditProcedureCommand}" CommandParameter="{Binding .}"/>
+                                    ImageSource="pencil_icon.png"
+                                    CornerRadius="10" WidthRequest="80" HeightRequest="20" Padding="0"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:BeautyTechViewModel}}, 
+                                    Path=GoToEditBeautyTechCommand}" CommandParameter="{Binding .}"/>
                                         </Frame>
                                     </SwipeItemView>
                                 </SwipeItems>
                             </SwipeView.RightItems>
                             <FlexLayout>
                                 <Label BackgroundColor="Transparent" FontAttributes="Bold"  
-                           TextColor="White" Padding="10" x:Name="procedure" FontSize="Large"
-                           Text="{Binding Name}"/>
+                                       TextColor="White" Padding="10" x:Name="procedure" FontSize="Large"
+                                       Text="{Binding Name}"/>
                             </FlexLayout>
                         </SwipeView>
                     </DataTemplate>
@@ -69,15 +69,14 @@
 
         <!-- Overlay loader (центр экрана) -->
         <Grid Grid.RowSpan="2"
-          IsVisible="{Binding IsLoading}"
-          BackgroundColor="#80000000"
-          InputTransparent="False">
+      IsVisible="{Binding IsLoading}"
+      BackgroundColor="#80000000"
+      InputTransparent="False">
 
             <ActivityIndicator IsRunning="{Binding IsLoading}"
-                           IsVisible="{Binding IsLoading}"
-                           HorizontalOptions="Center" VerticalOptions="Center"
-                           WidthRequest="48" HeightRequest="48" Color="Gray"/>
+                       IsVisible="{Binding IsLoading}"
+                       HorizontalOptions="Center" VerticalOptions="Center"
+                       WidthRequest="48" HeightRequest="48" Color="Gray"/>
         </Grid>
     </Grid>
-
 </ContentPage>

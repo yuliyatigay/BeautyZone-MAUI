@@ -23,7 +23,7 @@ public partial class ProcedureFormViewModel : ObservableObject, IQueryAttributab
     [RelayCommand]
     public async Task Back()
     {
-        await Shell.Current.GoToAsync("..", true);
+        await Shell.Current.GoToAsync(nameof(ProcedurePage));
     }
     [RelayCommand]
     public async Task Submit()

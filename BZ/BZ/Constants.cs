@@ -6,5 +6,5 @@ namespace BZ;
 
 public static class Constants
 {
-    public const string BaseApiUrl = "http://172.30.1.60:5220/";
+    public const string BaseApiUrl = "http://172.30.1.39:5220/";
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:BZ.ViewModels"
+             xmlns:editors="clr-namespace:Syncfusion;assembly=Syncfusion.Maui.Inputs"
+             xmlns:model="clr-namespace:Domain.Models;assembly=Domain"
+             x:DataType="vm:BeautyTechFormViewModel"
+             x:Class="BZ.Pages.BeautyTechFormPage"
+             Title="Форма для мастера"
+             Shell.BackgroundColor="#1D1616"
+             Shell.TitleColor="#D3DAD9">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}" />
+    </Shell.BackButtonBehavior>
+    <VerticalStackLayout Padding="30" Spacing="10" BackgroundColor="#1D1616">
+        <Entry Placeholder="Имя мастера"
+       Text="{Binding Name}"
+       TextColor="White" BackgroundColor="#44444E"/>
+
+        <Entry Placeholder="Номер телефона"
+       Text="{Binding PhoneNumber}"
+       TextColor="White" BackgroundColor="#44444E"/>
+
+        <Button Text="Выбрать процедуры"
+        BackgroundColor="#44444E"
+        TextColor="White"
+        Command="{Binding OpenProceduresPopupCommand}"/>
+
+        <Label Text="{Binding SelectedProceduresText}"
+       TextColor="#D3DAD9"
+       LineBreakMode="TailTruncation"/>
+
+        <Button Text="Сохранить"
+        BackgroundColor="#CC561E"
+        TextColor="White"
+        Command="{Binding SubmitCommand}"/>
+    </VerticalStackLayout>
+</ContentPage>

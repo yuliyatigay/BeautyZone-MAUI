@@ -13,8 +13,5 @@
     <ShellContent Title="Login"
                ContentTemplate="{DataTemplate pages:LoginPage}"
                Route="LoginPage" />
-    <ShellContent Title="Procedure"
-           ContentTemplate="{DataTemplate pages:ProcedurePage}"
-           Route="ProcedurePage" />
-    
+
 </Shell>

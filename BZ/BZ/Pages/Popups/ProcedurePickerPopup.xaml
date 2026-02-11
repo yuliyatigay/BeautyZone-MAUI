@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="BZ.Pages.Popups.ProcedurePickerPopup">
+
+    <Border BackgroundColor="#2A2A33" Padding="16" WidthRequest="340">
+        <VerticalStackLayout Spacing="12">
+            <Label Text="Выберите процедуры" TextColor="White" FontAttributes="Bold"/>
+
+            <CollectionView ItemsSource="{Binding Items}" HeightRequest="340">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="Auto,*" Padding="6">
+                            <CheckBox IsChecked="{Binding IsSelected}" />
+                            <Label Grid.Column="1"
+                                   Text="{Binding Name}"
+                                   TextColor="White"
+                                   VerticalTextAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
+                <Button Text="Отмена" Clicked="OnCancelClicked" BackgroundColor="#44444E" TextColor="White"/>
+                <Button Text="Готово" Clicked="OnDoneClicked" BackgroundColor="#44444E" TextColor="White"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Border>
+</toolkit:Popup>

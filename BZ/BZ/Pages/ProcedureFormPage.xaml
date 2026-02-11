@@ -4,8 +4,8 @@
              xmlns:vm="clr-namespace:BZ.ViewModels"
              xmlns:model="clr-namespace:Domain.Models;assembly=Domain"
              x:DataType="vm:ProcedureFormViewModel"
-             x:Class="BZ.Pages.CreateProcedurePage"
-             Title="Добавить процедуру"
+             x:Class="BZ.Pages.ProcedureFormPage"
+             Title="Форма для процедуры"
              Shell.BackgroundColor="#1D1616"
              Shell.TitleColor="#D3DAD9">
     <Shell.BackButtonBehavior>
