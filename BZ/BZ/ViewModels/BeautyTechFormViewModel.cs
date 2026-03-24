@@ -66,14 +66,13 @@ public partial class BeautyTechFormViewModel : ObservableObject, IQueryAttributa
     [RelayCommand]
     public async Task Submit()
     {
-        // собираем объект для отправки
         if (beautyTech is null)
         {
             var created = new BeautyTech
             {
                 Name = Name,
                 PhoneNumber = PhoneNumber,
-                Procedures = SelectedProcedureIds.ToList()
+                Procedures = SelectedProcedures
             };
 
             var result = await _beautyTechService.CreateBeautyTechAsync(created);
@@ -84,7 +83,7 @@ public partial class BeautyTechFormViewModel : ObservableObject, IQueryAttributa
         {
             beautyTech.Name = Name;
             beautyTech.PhoneNumber = PhoneNumber;
-            beautyTech.Procedures = SelectedProcedureIds.ToList();
+            beautyTech.Procedures = SelectedProcedures;
 
             var ok = await _beautyTechService.UpdateBeautyTechAsync(beautyTech);
             if (ok)
@@ -106,7 +105,7 @@ public partial class BeautyTechFormViewModel : ObservableObject, IQueryAttributa
 
             Name = b.Name;
             PhoneNumber = b.PhoneNumber;
-            SelectedProcedureIds = new ObservableCollection<Guid>(b.Procedures);
+            SelectedProcedureIds = new ObservableCollection<Guid>(b.Procedures.Select(x => x.Id));
 
             OnPropertyChanged(nameof(SelectedProceduresText));
             OnPropertyChanged(nameof(SelectedProcedures));

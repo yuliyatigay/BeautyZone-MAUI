@@ -3,33 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
              xmlns:model="clr-namespace:Domain.Models;assembly=Domain"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:vm="clr-namespace:BZ.ViewModels;assembly=BZ"
              x:DataType="vm:BeautyTechViewModel"
              x:Class="BZ.Pages.BeautyTechsPage"
              Title="BeautyTechsPage"
-             Shell.BackgroundColor="#1D1616"
-             Shell.TitleColor="#D3DAD9">
+             Shell.BackgroundColor="#F2F2F2"
+             Shell.TitleColor="#7D7C7C">
 
-    <Grid BackgroundColor="#1D1616">
+    <Grid BackgroundColor="#F2F2F2">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Кнопка Создать -->
         <FlexLayout Grid.Row="0">
             <HorizontalStackLayout Margin="2" Spacing="5">
                 <Button ImageSource="plus_icon_white.png" VerticalOptions="Center"
-                BackgroundColor="#3F4F44" WidthRequest="60" HeightRequest="10"
+                BackgroundColor="#3F4F44" WidthRequest="10" HeightRequest="10" CornerRadius="20"
                 Command="{Binding GoToCreateBeautyTechCommand}"/>
             </HorizontalStackLayout>
         </FlexLayout>
 
-        <!-- Список + pull-to-refresh -->
         <RefreshView Grid.Row="1"
              IsRefreshing="{Binding IsRefreshing}"
              Command="{Binding RefreshCommand}">
-            <CollectionView BackgroundColor="#1D1616" 
+            <CollectionView BackgroundColor="#F2F2F2" 
 Grid.Row="1" ItemsSource="{Binding BeautyTechs}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:BeautyTech">
@@ -37,19 +36,19 @@ Grid.Row="1" ItemsSource="{Binding BeautyTechs}">
                             <SwipeView.RightItems>
                                 <SwipeItems SwipeBehaviorOnInvoked="Close">
                                     <SwipeItemView>
-                                        <Frame BackgroundColor="Transparent" WidthRequest="80">
+                                        <Frame BackgroundColor="Transparent" WidthRequest="50">
                                             <Button Background="Red" HorizontalOptions="Center" 
                                     VerticalOptions="Center" ImageSource="trash_icon.png"
-                                    CornerRadius="10" WidthRequest="80" HeightRequest="20" Padding="0"
+                                    CornerRadius="20" WidthRequest="20" HeightRequest="20" Padding="0"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type vm:BeautyTechViewModel}}, 
                                     Path=DeleteCommand}" CommandParameter="{Binding Id}"/>
                                         </Frame>
                                     </SwipeItemView>
                                     <SwipeItemView>
-                                        <Frame BackgroundColor="Transparent" WidthRequest="80">
+                                        <Frame BackgroundColor="Transparent" WidthRequest="50">
                                             <Button Background="DarkSlateBlue" HorizontalOptions="Center" VerticalOptions="Center"
                                     ImageSource="pencil_icon.png"
-                                    CornerRadius="10" WidthRequest="80" HeightRequest="20" Padding="0"
+                                    CornerRadius="20" WidthRequest="20" HeightRequest="20" Padding="0"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type vm:BeautyTechViewModel}}, 
                                     Path=GoToEditBeautyTechCommand}" CommandParameter="{Binding .}"/>
                                         </Frame>
@@ -58,7 +57,7 @@ Grid.Row="1" ItemsSource="{Binding BeautyTechs}">
                             </SwipeView.RightItems>
                             <FlexLayout>
                                 <Label BackgroundColor="Transparent" FontAttributes="Bold"  
-                                       TextColor="White" Padding="10" x:Name="procedure" FontSize="Large"
+                                       TextColor="#31304D" Padding="10" x:Name="procedure" FontSize="Large"
                                        Text="{Binding Name}"/>
                             </FlexLayout>
                         </SwipeView>
@@ -67,10 +66,9 @@ Grid.Row="1" ItemsSource="{Binding BeautyTechs}">
             </CollectionView>
         </RefreshView>
 
-        <!-- Overlay loader (центр экрана) -->
         <Grid Grid.RowSpan="2"
       IsVisible="{Binding IsLoading}"
-      BackgroundColor="#80000000"
+      BackgroundColor="#F2F2F2"
       InputTransparent="False">
 
             <ActivityIndicator IsRunning="{Binding IsLoading}"

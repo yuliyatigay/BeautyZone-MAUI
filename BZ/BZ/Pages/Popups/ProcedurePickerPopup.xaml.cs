@@ -33,7 +33,7 @@ public partial class ProcedurePickerPopup : Popup
     private async void OnDoneClicked(object sender, EventArgs e)
     {
         var ids = Items.Where(i => i.IsSelected).Select(i => i.Id).ToList();
-        _onDone(ids);       // <-- ???????? ????????? ??????
+        _onDone(ids); 
         await CloseAsync();
     }
 

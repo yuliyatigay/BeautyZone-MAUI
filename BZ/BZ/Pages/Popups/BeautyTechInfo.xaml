@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<toolkit:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="BZ.Pages.Popups.BeautyTechInfo">
+    
+    <Frame
+        Padding="0"
+        CornerRadius="16"
+        BackgroundColor="White"
+        HasShadow="True"
+        WidthRequest="300">
+
+        <VerticalStackLayout Spacing="16" Padding="20">
+
+            <!-- кнопка закрыть -->
+            <Grid>
+                <Button
+                    Clicked="OnCancelClicked"
+                    Text="✕"
+                    FontSize="14"
+                    BackgroundColor="Transparent"
+                    TextColor="Gray"
+                    HorizontalOptions="End"
+                    WidthRequest="32"
+                    HeightRequest="32"
+                    Padding="0"/>
+            </Grid>
+
+            <!-- поле ввода -->
+            <Entry
+                TextColor="#31304D"
+                BackgroundColor="#F2F2F2"
+                Placeholder="Имя мастера"
+                Text="{Binding Specialist.Name}" />
+            <Entry
+                TextColor="#31304D"
+                BackgroundColor="#F2F2F2"
+                Placeholder="Номер телефона"/>
+
+            <!-- кнопка сохранить -->
+            <Button
+                Text="Сохранить"
+                BackgroundColor="#8EACCD"
+                TextColor="White"
+                CornerRadius="10"
+                Clicked="OnDoneClicked"/>
+
+        </VerticalStackLayout>
+
+    </Frame>
+    
+</toolkit:Popup>

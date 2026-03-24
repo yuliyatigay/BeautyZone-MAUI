@@ -50,7 +50,7 @@ namespace DataAccess.Services
             {
                 Name = beautyTech.Name,
                 PhoneNumber = beautyTech.PhoneNumber,
-                Procedures = beautyTech.Procedures
+                Procedures = beautyTech.Procedures.Select(x => x.Id)
             });
             if (response.StatusCode == HttpStatusCode.Conflict)
             {

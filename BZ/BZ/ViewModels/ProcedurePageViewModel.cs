@@ -4,8 +4,8 @@ using CommunityToolkit.Mvvm.Input;
 using Domain.Interfaces;
 using Domain.Models;
 using System.Collections.ObjectModel;
-using System.Reflection.Metadata;
-using System.Runtime.InteropServices.Marshalling;
+using BZ.Pages.Popups;
+using CommunityToolkit.Maui.Extensions;
 
 namespace BZ.ViewModels;
 
@@ -19,6 +19,9 @@ public partial class ProcedurePageViewModel : ObservableObject
     private bool isRefreshing;
     [ObservableProperty]
     private bool isLoading;
+
+    [ObservableProperty] 
+    private Procedure newProcedure = new();
 
 
     public ProcedurePageViewModel(IProcedureService procedureService)
@@ -57,32 +60,59 @@ public partial class ProcedurePageViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public async Task GoToCreateProcedure()
+    public async Task Delete(Procedure procedure)
     {
-        await Shell.Current.GoToAsync(nameof(ProcedureFormPage));
-    }
+        bool confirm = await Shell.Current.DisplayAlert(
+            "Удаление",
+            "Вы действительно хотите удалить эту процедуру?",
+            "Да",
+            "Нет");
 
-    [RelayCommand]
-    public async Task Delete(Guid id)
-    {
-        await _procedureService.Delete(id);
-        var deleted = Procedures.FirstOrDefault(p => p.Id == id);
+        if (!confirm)
+            return;
+
+        await _procedureService.Delete(procedure.Id);
+
+        var deleted = Procedures.FirstOrDefault(p => p.Id == procedure.Id);
 
         if (deleted != null)
         {
             Procedures.Remove(deleted);
-            await Shell.Current.DisplayAlert("Готово", "Процедура удалена успешно", "OK");
         }
-            
+
+        await Shell.Current.DisplayAlert("Готово", "Процедура удалена успешно", "OK");
     }
+    
 
     [RelayCommand]
-    public async Task GoToEditProcedure(Procedure procedure)
+    public async Task OpenProcedurePopup(Procedure procedure)
     {
-        Dictionary<string, object> query = new()
+
+        var popup = new ProcedureFormPopup(procedure.Name, procedure.Id, async edited=>Submit(edited));
+            
+        await Shell.Current.CurrentPage.ShowPopupAsync(popup);
+    }
+    
+    public async Task Submit(Procedure procedure)
+    {
+        
+        if (procedure.Id == Guid.Empty)
         {
-                { nameof(Procedure), procedure}
-        };
-        await Shell.Current.GoToAsync(nameof(ProcedureFormPage), query);
+            var result = await _procedureService.CreateProcedure(procedure.Name);
+            if(result != null)
+            {
+                await Shell.Current.DisplayAlert("Готово", "Процедура создана успешно", "OK");
+            }
+            await Shell.Current.GoToAsync(nameof(ProcedurePage));
+        }
+        else
+        {
+            var result = await _procedureService.UpdateProcedure(procedure);
+            if (result)
+            {
+                await Shell.Current.DisplayAlert("Готово", "Процедура обновлена успешно", "OK");
+            }
+            await Shell.Current.GoToAsync(nameof(ProcedurePage));
+        }
     }
 }

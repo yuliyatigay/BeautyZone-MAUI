@@ -4,6 +4,8 @@ using CommunityToolkit.Mvvm.Input;
 using Domain.Interfaces;
 using Domain.Models;
 using System.Collections.ObjectModel;
+using BZ.Pages.Popups;
+using CommunityToolkit.Maui.Views;
 
 namespace BZ.ViewModels
 {
@@ -13,6 +15,7 @@ namespace BZ.ViewModels
 
         [ObservableProperty]
         private ObservableCollection<BeautyTech> beautyTechs = new();
+        public ObservableCollection<ProcedurePickerItem> ProcedurePickers { get; } = new();
         [ObservableProperty]
         private bool isRefreshing;
         [ObservableProperty]
@@ -21,6 +24,11 @@ namespace BZ.ViewModels
         public BeautyTechViewModel(IBeautyTechService beautyTechService)
         {
             _beautyTechService = beautyTechService;
+        }
+
+        public async Task OpenBeautyTechPopup(Procedure procedure)
+        {
+            
         }
 
         public async Task LoadBeautyTechs()
@@ -54,12 +62,6 @@ namespace BZ.ViewModels
         }
 
         [RelayCommand]
-        public async Task GoToCreateBeautyTech()
-        {
-            await Shell.Current.GoToAsync(nameof(BeautyTechFormPage));
-        }
-
-        [RelayCommand]
         public async Task Delete(Guid id)
         {
             await _beautyTechService.DeleteBeautyTechAsync(id);
@@ -72,15 +74,10 @@ namespace BZ.ViewModels
             }
 
         }
-
-        [RelayCommand]
-        public async Task GoToEditBeautyTech(BeautyTech beautyTech)
-        {
-            Dictionary<string, object> query = new()
-        {
-                { nameof(BeautyTech), beautyTech}
-        };
-            await Shell.Current.GoToAsync(nameof(BeautyTechFormPage), query);
-        }
     }
+}
+public partial class ProcedurePickerItem : ObservableObject
+{
+    [ObservableProperty]
+    private Procedure? selectedProcedure;
 }

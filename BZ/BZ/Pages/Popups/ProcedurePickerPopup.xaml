@@ -5,7 +5,7 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:Class="BZ.Pages.Popups.ProcedurePickerPopup">
 
-    <Border BackgroundColor="#2A2A33" Padding="16" WidthRequest="340">
+    <Border BackgroundColor="#B6BBC4" Padding="16" WidthRequest="340">
         <VerticalStackLayout Spacing="12">
             <Label Text="Выберите процедуры" TextColor="White" FontAttributes="Bold"/>
 
@@ -16,7 +16,7 @@
                             <CheckBox IsChecked="{Binding IsSelected}" />
                             <Label Grid.Column="1"
                                    Text="{Binding Name}"
-                                   TextColor="White"
+                                   TextColor="#31304D"
                                    VerticalTextAlignment="Center"/>
                         </Grid>
                     </DataTemplate>

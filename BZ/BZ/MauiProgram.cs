@@ -40,14 +40,12 @@ namespace BZ
             builder.Services.AddScoped<LoginPageViewModel>();
             builder.Services.AddScoped<HomePageViewModel>();
             builder.Services.AddScoped<ProcedurePageViewModel>();
-            builder.Services.AddScoped<ProcedureFormViewModel>();
             builder.Services.AddScoped<BeautyTechViewModel>();
             builder.Services.AddScoped<BeautyTechFormViewModel>();
 
             builder.Services.AddTransient<HomePage>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<ProcedurePage>();
-            builder.Services.AddTransient<ProcedureFormPage>();
             builder.Services.AddTransient<BeautyTechsPage>();
             builder.Services.AddTransient<BeautyTechFormPage>();
 
