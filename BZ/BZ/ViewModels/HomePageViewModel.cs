@@ -69,4 +69,16 @@ public partial class HomePageViewModel : ObservableObject
             Shell.Current.DisplayAlert("Navigation Error", ex.Message, "OK");
         }
     }
+    [RelayCommand]
+    private async Task NavigateToCustomerPage()
+    {
+        try
+        {
+            await Shell.Current.GoToAsync(nameof(CustomerPage));
+        }
+        catch (Exception ex)
+        {
+            Shell.Current.DisplayAlert("Navigation Error", ex.Message, "OK");
+        }
+    }
 }

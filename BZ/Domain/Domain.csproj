@@ -17,7 +17,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.31" />
+		<PackageReference Include="CommunityToolkit.HighPerformance" Version="8.4.2" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.60" />
+		</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0-ios'">
+	  <PackageReference Include="Microsoft.NET.ILLink.Tasks" Version="10.0.6" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0-maccatalyst'">
+	  <PackageReference Include="Microsoft.NET.ILLink.Tasks" Version="10.0.6" />
 	</ItemGroup>
 
 </Project>

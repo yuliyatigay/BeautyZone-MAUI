@@ -12,69 +12,72 @@
              Shell.TitleColor="#7D7C7C">
 
     <Grid BackgroundColor="#F2F2F2">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
 
-        <FlexLayout Grid.Row="0">
-            <HorizontalStackLayout Margin="2" Spacing="5">
-                <Button ImageSource="plus_icon_white.png" VerticalOptions="Center"
-                BackgroundColor="#3F4F44" WidthRequest="10" HeightRequest="10" CornerRadius="20"
-                Command="{Binding GoToCreateBeautyTechCommand}"/>
-            </HorizontalStackLayout>
-        </FlexLayout>
+    <RefreshView Grid.Row="0"
+                 IsRefreshing="{Binding IsRefreshing}"
+                 Command="{Binding RefreshCommand}">
+        <CollectionView
+            BackgroundColor="#F2F2F2"
+            ItemsSource="{Binding Specialists}"
+            SelectionMode="Single"
+            SelectionChanged="OnSpecialistSelected">
 
-        <RefreshView Grid.Row="1"
-             IsRefreshing="{Binding IsRefreshing}"
-             Command="{Binding RefreshCommand}">
-            <CollectionView BackgroundColor="#F2F2F2" 
-Grid.Row="1" ItemsSource="{Binding BeautyTechs}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:BeautyTech">
-                        <SwipeView ios:SwipeView.SwipeTransitionMode="Reveal">
-                            <SwipeView.RightItems>
-                                <SwipeItems SwipeBehaviorOnInvoked="Close">
-                                    <SwipeItemView>
-                                        <Frame BackgroundColor="Transparent" WidthRequest="50">
-                                            <Button Background="Red" HorizontalOptions="Center" 
-                                    VerticalOptions="Center" ImageSource="trash_icon.png"
-                                    CornerRadius="20" WidthRequest="20" HeightRequest="20" Padding="0"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:BeautyTechViewModel}}, 
-                                    Path=DeleteCommand}" CommandParameter="{Binding Id}"/>
-                                        </Frame>
-                                    </SwipeItemView>
-                                    <SwipeItemView>
-                                        <Frame BackgroundColor="Transparent" WidthRequest="50">
-                                            <Button Background="DarkSlateBlue" HorizontalOptions="Center" VerticalOptions="Center"
-                                    ImageSource="pencil_icon.png"
-                                    CornerRadius="20" WidthRequest="20" HeightRequest="20" Padding="0"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:BeautyTechViewModel}}, 
-                                    Path=GoToEditBeautyTechCommand}" CommandParameter="{Binding .}"/>
-                                        </Frame>
-                                    </SwipeItemView>
-                                </SwipeItems>
-                            </SwipeView.RightItems>
-                            <FlexLayout>
-                                <Label BackgroundColor="Transparent" FontAttributes="Bold"  
-                                       TextColor="#31304D" Padding="10" x:Name="procedure" FontSize="Large"
-                                       Text="{Binding Name}"/>
-                            </FlexLayout>
-                        </SwipeView>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </RefreshView>
+            <CollectionView.EmptyView>
+                <Label Text="Мастеров пока нет"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       TextColor="Gray"/>
+            </CollectionView.EmptyView>
 
-        <Grid Grid.RowSpan="2"
-      IsVisible="{Binding IsLoading}"
-      BackgroundColor="#F2F2F2"
-      InputTransparent="False">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:BeautyTech">
+                    <SwipeView Threshold="120">
+                        <SwipeView.RightItems>
+                            <SwipeItems Mode="Reveal">
+                                <SwipeItemView>
+                                    <Button Text="Удалить"
+                                            BackgroundColor="Red"
+                                            Margin="2"
+                                            CornerRadius="25"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:BeautyTechViewModel}},
+                                                              Path=DeleteCommand}"
+                                            CommandParameter="{Binding .}" />
+                                </SwipeItemView>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
 
-            <ActivityIndicator IsRunning="{Binding IsLoading}"
-                       IsVisible="{Binding IsLoading}"
-                       HorizontalOptions="Center" VerticalOptions="Center"
-                       WidthRequest="48" HeightRequest="48" Color="Gray"/>
-        </Grid>
-    </Grid>
+                        <Frame Margin="10"
+                               Padding="25"
+                               CornerRadius="25"
+                               BackgroundColor="#FBFBFB">
+                            <Label HorizontalOptions="Center"
+                                   FontSize="20"
+                                   Text="{Binding Name}"
+                                   TextColor="Black"/>
+                        </Frame>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
+
+    <Frame Grid.Row="1"
+           Margin="10"
+           Padding="25"
+           CornerRadius="25"
+           BackgroundColor="#FBFBFB">
+        <Button HorizontalOptions="Center"
+                FontSize="20"
+                BackgroundColor="Transparent"
+                Text="Создать"
+                TextColor="Black"
+                Command="{Binding OpenBeautyTechPopupCommand}"
+                CommandParameter="{Binding NewSpecialist}"/>
+    </Frame>
+</Grid>
+
 </ContentPage>

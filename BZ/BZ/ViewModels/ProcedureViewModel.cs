@@ -9,7 +9,7 @@ using CommunityToolkit.Maui.Extensions;
 
 namespace BZ.ViewModels;
 
-public partial class ProcedurePageViewModel : ObservableObject
+public partial class ProcedureViewModel : ObservableObject
 {
     private readonly IProcedureService _procedureService;
 
@@ -24,7 +24,7 @@ public partial class ProcedurePageViewModel : ObservableObject
     private Procedure newProcedure = new();
 
 
-    public ProcedurePageViewModel(IProcedureService procedureService)
+    public ProcedureViewModel(IProcedureService procedureService)
     {
         _procedureService = procedureService;
     }
@@ -103,7 +103,8 @@ public partial class ProcedurePageViewModel : ObservableObject
             {
                 await Shell.Current.DisplayAlert("Готово", "Процедура создана успешно", "OK");
             }
-            await Shell.Current.GoToAsync(nameof(ProcedurePage));
+
+            await Refresh();
         }
         else
         {
@@ -112,7 +113,7 @@ public partial class ProcedurePageViewModel : ObservableObject
             {
                 await Shell.Current.DisplayAlert("Готово", "Процедура обновлена успешно", "OK");
             }
-            await Shell.Current.GoToAsync(nameof(ProcedurePage));
+            await Refresh();
         }
     }
 }

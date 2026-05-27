@@ -13,9 +13,18 @@ public partial class ProcedureFormPopup : Popup
 {
     public Procedure Procedure { get;  }
     private readonly Func<Procedure, Task> _onDone;
+    public string PopupTitle { get; set; }
     public ProcedureFormPopup(string procedureName, Guid selectedId, Func<Procedure, Task> onDone)
     {
         InitializeComponent();
+        if (string.IsNullOrWhiteSpace(procedureName))
+        {
+            PopupTitle = "Создать процедуру";
+        }
+        else
+        { 
+            PopupTitle = "Редактировать процедуру";
+        }
         Procedure = new Procedure
         {
             Name = procedureName,
@@ -23,6 +32,7 @@ public partial class ProcedureFormPopup : Popup
         };
         _onDone = onDone;
         BindingContext = this;
+        
     }
     
     private async void OnDoneClicked(object sender, EventArgs e)

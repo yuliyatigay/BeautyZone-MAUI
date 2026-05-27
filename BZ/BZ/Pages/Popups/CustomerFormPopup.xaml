@@ -4,7 +4,9 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-               x:Class="BZ.Pages.Popups.BeautyTechInfo">
+    xmlns:vm="clr-namespace:BZ.ViewModels"
+    x:Class="BZ.Pages.Popups.CustomerFormPopup">
+    
     
     <Frame
         Padding="0"
@@ -15,8 +17,11 @@
 
         <VerticalStackLayout Spacing="16" Padding="20">
 
-            <!-- кнопка закрыть -->
-            <Grid>
+            <Grid Padding="0">
+                <Label Text="{Binding PopupTitle}"
+                       FontSize="16"
+                       TextColor="Gray"
+                       VerticalOptions="Center"/>
                 <Button
                     Clicked="OnCancelClicked"
                     Text="✕"
@@ -25,20 +30,21 @@
                     TextColor="Gray"
                     HorizontalOptions="End"
                     WidthRequest="32"
-                    HeightRequest="32"
-                    Padding="0"/>
+                    HeightRequest="32"/>
             </Grid>
 
-            <!-- поле ввода -->
             <Entry
                 TextColor="#31304D"
                 BackgroundColor="#F2F2F2"
-                Placeholder="Имя мастера"
-                Text="{Binding Specialist.Name}" />
+                Placeholder="Имя клиента"
+                Text="{Binding Customer.Name}" />
             <Entry
                 TextColor="#31304D"
                 BackgroundColor="#F2F2F2"
-                Placeholder="Номер телефона"/>
+                Keyboard="Numeric"
+                Placeholder="Номер телефона"
+                Text="{Binding Customer.PhoneNumber}" />
+            
 
             <!-- кнопка сохранить -->
             <Button
@@ -51,5 +57,4 @@
         </VerticalStackLayout>
 
     </Frame>
-    
 </toolkit:Popup>

@@ -7,22 +7,22 @@ namespace BZ.Pages;
 
 public partial class ProcedurePage : ContentPage
 {
-    private readonly ProcedurePageViewModel viewModel;
+    private readonly ProcedureViewModel viewModel;
     
     public ProcedurePage(IProcedureService procedureService)
     {
         InitializeComponent();
-        viewModel = new ProcedurePageViewModel(procedureService);
+        viewModel = new ProcedureViewModel(procedureService);
         BindingContext = viewModel;
     }
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await ((ProcedurePageViewModel)BindingContext).LoadProcedures();
+        await ((ProcedureViewModel)BindingContext).LoadProcedures();
     }
     private async void OnProcedureSelected(object sender, SelectionChangedEventArgs e)
     {
-        if (BindingContext is not ProcedurePageViewModel vm)
+        if (BindingContext is not ProcedureViewModel vm)
             return;
 
         var procedure = e.CurrentSelection.FirstOrDefault() as Procedure;

@@ -11,6 +11,7 @@
         <Label Text="Админ Панель" FontSize="32" HorizontalOptions="Center" IsVisible="{Binding IsAdmin}"/>
         <Button BackgroundColor="#B6BBC4" TextColor="#31304D" Text="Процедуры" Command="{Binding NavigateToProceduresPageCommand}"/>
         <Button BackgroundColor="#B6BBC4" TextColor="#31304D" Text="Мастера" Command="{Binding NavigateToBeautyTechPageCommand}"/>
+        <Button BackgroundColor="#B6BBC4" TextColor="#31304D" Text="Клиенты" Command="{Binding NavigateToCustomerPageCommand}"/>
         <Button BackgroundColor="#B6BBC4" TextColor="#31304D" Text="Выйти" Command="{Binding Source={RelativeSource  AncestorType={x:Type vm:HomePageViewModel}}, Path=LogoutCommand}"/>
 
     </VerticalStackLayout>

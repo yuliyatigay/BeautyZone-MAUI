@@ -94,11 +94,14 @@ namespace DataAccess.Services
 
         public async Task<bool> UpdateBeautyTechAsync(BeautyTech beautyTech)
         {
+            var procedures = beautyTech.Procedures?
+                .Select(p => p.Id)
+                .ToList();
             using var response = await _httpClient.PutAsJsonAsync($"api/BeautyTech/UpdateBeautyTechAsync/{beautyTech.Id}", new
             {
                 Name = beautyTech.Name,
                 PhoneNumber = beautyTech.PhoneNumber,
-                Procedures = beautyTech.Procedures
+                Procedures = procedures
             });
             if (!response.IsSuccessStatusCode)
                 return false;

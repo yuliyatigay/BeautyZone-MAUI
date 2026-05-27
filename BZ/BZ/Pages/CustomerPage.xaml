@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:Domain.Models;assembly=Domain"
+             xmlns:vm="clr-namespace:BZ.ViewModels;assembly=BZ"
+             x:DataType="vm:CustomerViewModel"
+             x:Class="BZ.Pages.CustomerPage">
+    <Grid BackgroundColor="#F2F2F2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <RefreshView Grid.Row="0"
+                     IsRefreshing="{Binding IsRefreshing}"
+                     Command="{Binding RefreshCommand}">
+            
+            <CollectionView
+                BackgroundColor="#F2F2F2"
+                ItemsSource="{Binding Customers}"
+                SelectionMode="Single"
+                SelectionChanged="OnCustomerSelected">
+                    
+                    <CollectionView.EmptyView>
+                        <Label Text="Клиентов пока нет"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               TextColor="Gray"/>
+                    </CollectionView.EmptyView>
+                    
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Customer">
+                            <SwipeView Threshold="120">
+                                <SwipeView.RightItems>
+                                    <SwipeItems Mode="Reveal">
+                                        <SwipeItemView>
+                                            <Button  Text="Удалить" 
+                                                     BackgroundColor="Red" 
+                                                     Margin="2" CornerRadius="25"
+                                                     Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CustomerViewModel}},
+                                                     Path=DeleteCommand}"
+                                                     CommandParameter="{Binding .}" />
+                                        </SwipeItemView>
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                
+                                <Frame Margin="10"
+                                       Padding="25"
+                                       CornerRadius="25"
+                                       BackgroundColor="#FBFBFB">
+                                    <Label HorizontalOptions="Center"
+                                           FontSize="20"
+                                           Text="{Binding Name}"
+                                           TextColor="Black"/>
+                                </Frame>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+            
+            <Frame Grid.Row="1"
+                   Margin="10"
+                   Padding="25"
+                   CornerRadius="25"
+                   BackgroundColor="#FBFBFB">
+                <Button HorizontalOptions="Center"
+                        FontSize="20"
+                        BackgroundColor="Transparent"
+                        Text="Создать"
+                        TextColor="Black"
+                        Command="{Binding OpenCustomerPopupCommand}"
+                        CommandParameter="{Binding NewCustomer}"/>
+            </Frame>
+            
+    </Grid>
+</ContentPage>

@@ -25,6 +25,7 @@ namespace BZ
             builder.Services.AddTransient<AuthHeaderHandler>();
             builder.Services.AddSingleton<IProcedureService, ProcedureService>();
             builder.Services.AddSingleton<IBeautyTechService, BeautyTechService>();
+            builder.Services.AddSingleton<ICustomerService, CustomerService>();
 
             builder.Services.AddHttpClient("AppHttpClient", client =>
             {
@@ -39,15 +40,15 @@ namespace BZ
 
             builder.Services.AddScoped<LoginPageViewModel>();
             builder.Services.AddScoped<HomePageViewModel>();
-            builder.Services.AddScoped<ProcedurePageViewModel>();
+            builder.Services.AddScoped<ProcedureViewModel>();
             builder.Services.AddScoped<BeautyTechViewModel>();
-            builder.Services.AddScoped<BeautyTechFormViewModel>();
+            builder.Services.AddScoped<CustomerViewModel>();
 
             builder.Services.AddTransient<HomePage>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<ProcedurePage>();
             builder.Services.AddTransient<BeautyTechsPage>();
-            builder.Services.AddTransient<BeautyTechFormPage>();
+            builder.Services.AddTransient<CustomerPage>();
 
 #if DEBUG
             builder.Logging.AddDebug();

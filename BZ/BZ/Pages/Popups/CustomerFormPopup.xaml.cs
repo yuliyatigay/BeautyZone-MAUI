@@ -8,12 +8,20 @@ using Domain.Models;
 
 namespace BZ.Pages.Popups;
 
-public partial class BeautyTechInfo : Popup
+public partial class CustomerFormPopup : Popup
 {
-    public BeautyTech Specialist {get; }
-    public BeautyTechInfo()
+    public Customer Customer { get; }
+    private Func<Customer, Task> _onDone;
+    public string PopupTitle { get; set; }
+    public CustomerFormPopup(Customer customer, Func<Customer, Task> onDone)
     {
         InitializeComponent();
+        PopupTitle = "Редактировать клиента";
+
+        if (Customer == null)
+        {
+            PopupTitle = "Создать клиента";
+        }
     }
 
     private void OnCancelClicked(object? sender, EventArgs e)

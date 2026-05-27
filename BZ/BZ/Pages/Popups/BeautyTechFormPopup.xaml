@@ -1,0 +1,97 @@
+<toolkit:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="BZ.Pages.Popups.BeautyTechFormPopup"
+    x:Name="PopupRoot">
+
+    <Frame
+        Padding="0"
+        CornerRadius="16"
+        BackgroundColor="White"
+        HasShadow="True"
+        WidthRequest="320">
+
+        <ScrollView>
+            <VerticalStackLayout Spacing="16" Padding="20">
+
+                <Grid Padding="0">
+                    <Label Text="{Binding PopupTitle}"
+                           FontSize="16"
+                           TextColor="Gray"
+                           VerticalOptions="Center"/>
+                    <Button
+                        Clicked="OnCancelClicked"
+                        Text="✕"
+                        FontSize="14"
+                        BackgroundColor="Transparent"
+                        TextColor="Gray"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        WidthRequest="32"
+                        HeightRequest="32"/>
+                </Grid>
+
+                <Entry
+                    TextColor="#31304D"
+                    BackgroundColor="#F2F2F2"
+                    Placeholder="Имя мастера"
+                    Text="{Binding Specialist.Name}" />
+
+                <Entry
+                    TextColor="#31304D"
+                    BackgroundColor="#F2F2F2"
+                    Keyboard="Telephone" MaxLength="12"
+                    Placeholder="Номер телефона"
+                    Text="{Binding Specialist.PhoneNumber}"/>
+                
+
+                <Label
+                    Text="Процедуры"
+                    FontAttributes="Bold"
+                    TextColor="#31304D" />
+
+                <CollectionView
+                    ItemsSource="{Binding ProcedurePickers}"
+                    SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <HorizontalStackLayout Spacing="10" Margin="3">
+
+                                <Picker
+                                    Title="{Binding SelectedProcedure.Name}"
+                                    WidthRequest="220"
+                                    ItemsSource="{Binding Source={x:Reference PopupRoot}, Path=BindingContext.AvailableProcedures}"
+                                    ItemDisplayBinding="{Binding Name}"
+                                    SelectedItem="{Binding SelectedProcedure, Mode=TwoWay}" />
+
+                                <Button
+                                    Text="✕"
+                                    WidthRequest="36"
+                                    HeightRequest="36"
+                                    BackgroundColor="#F2F2F2"
+                                    TextColor="Black"
+                                    Clicked="OnRemovePickerClicked"
+                                    CommandParameter="{Binding .}" />
+                            </HorizontalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Button
+                    Text="+ Добавить процедуру"
+                    BackgroundColor="#D9EAFD"
+                    TextColor="Black"
+                    Clicked="OnAddPickerClicked" />
+
+                <Button
+                    Text="Сохранить"
+                    BackgroundColor="#8EACCD"
+                    TextColor="White"
+                    CornerRadius="10"
+                    Clicked="OnDoneClicked"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Frame>
+</toolkit:Popup>
