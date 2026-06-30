@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BZ.Controls.CardView">
+    <ContentView.ControlTemplate>
+        <ControlTemplate>
+            <Border Stroke="LightGray"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 10"
+                    Margin="10,5"
+                    Padding="10">
+
+                <Grid ColumnDefinitions="90,*">
+                    <Frame Grid.Column="0"
+                           HeightRequest="75"
+                           WidthRequest="75"
+                           CornerRadius="40"
+                           Padding="0"
+                           HasShadow="False"
+                           VerticalOptions="Center">
+                        <Image Source="person_icon.png"
+                               Aspect="AspectFill"/>
+                    </Frame>
+                    
+
+                    <VerticalStackLayout Grid.Column="1"
+                                         Margin="15,0,0,0"
+                                         Spacing="5">
+                        
+                        <Label Text="{TemplateBinding Title}"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="#555"/>
+                        
+                        <Label Text="{TemplateBinding PhoneNumber}"
+                               FontSize="13"
+                               TextColor="Gray"/>
+
+                        
+                        <BoxView HeightRequest="1"
+                                 BackgroundColor="LightGray"
+                                 Margin="0,5,0,5"/>
+
+                        
+                        <Label Text="{TemplateBinding CardDescription}"
+                               FontSize="13"
+                               TextColor="#555"
+                               LineBreakMode="WordWrap"/>
+
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+    </ContentView.ControlTemplate>
+   
+</ContentView>
