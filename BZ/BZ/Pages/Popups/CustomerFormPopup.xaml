@@ -1,12 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <toolkit:Popup
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    xmlns:vm="clr-namespace:BZ.ViewModels"
-    x:Class="BZ.Pages.Popups.CustomerFormPopup">
-    
+    x:Class="BZ.Pages.Popups.CustomerFormPopup"
+    x:Name="PopupRoot">
     
     <Frame
         Padding="0"
@@ -17,6 +14,7 @@
 
         <VerticalStackLayout Spacing="16" Padding="20">
 
+            <!-- кнопка закрыть -->
             <Grid Padding="0">
                 <Label Text="{Binding PopupTitle}"
                        FontSize="16"
@@ -30,9 +28,11 @@
                     TextColor="Gray"
                     HorizontalOptions="End"
                     WidthRequest="32"
-                    HeightRequest="32"/>
+                    HeightRequest="32"
+                    Padding="0"/>
             </Grid>
 
+            <!-- поле ввода -->
             <Entry
                 TextColor="#31304D"
                 BackgroundColor="#F2F2F2"
@@ -41,10 +41,9 @@
             <Entry
                 TextColor="#31304D"
                 BackgroundColor="#F2F2F2"
-                Keyboard="Numeric"
                 Placeholder="Номер телефона"
+                Keyboard="Telephone" MaxLength="12"
                 Text="{Binding Customer.PhoneNumber}" />
-            
 
             <!-- кнопка сохранить -->
             <Button

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
              xmlns:model="clr-namespace:Domain.Models;assembly=Domain"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:controls="clr-namespace:BZ.Controls"
              xmlns:vm="clr-namespace:BZ.ViewModels;assembly=BZ"
              x:DataType="vm:BeautyTechViewModel"
              x:Class="BZ.Pages.BeautyTechsPage"
@@ -50,34 +49,33 @@
                             </SwipeItems>
                         </SwipeView.RightItems>
 
-                        <Frame Margin="10"
-                               Padding="25"
-                               CornerRadius="25"
-                               BackgroundColor="#FBFBFB">
-                            <Label HorizontalOptions="Center"
-                                   FontSize="20"
-                                   Text="{Binding Name}"
-                                   TextColor="Black"/>
-                        </Frame>
+                        <StackLayout>
+                            <controls:CardView Title="{Binding Name}"
+                                               PhoneNumber="{Binding PhoneNumber}"
+                                               CardDescription="{Binding ProceduresDescription}">
+                            </controls:CardView>
+                        </StackLayout>
                     </SwipeView>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
+            <CollectionView.Footer>
+                <Button Text="+"
+                        FontSize="32"
+                        WidthRequest="60"
+                        HeightRequest="60"
+                        CornerRadius="30"
+                        Padding="0"
+                        Margin="20"
+                        HorizontalOptions="Center"
+                        BackgroundColor="#FBFBFB"
+                        TextColor="Black"
+                        Command="{Binding OpenBeautyTechPopupCommand}"
+                        CommandParameter="{Binding NewSpecialist}" />
+            </CollectionView.Footer>
         </CollectionView>
     </RefreshView>
 
-    <Frame Grid.Row="1"
-           Margin="10"
-           Padding="25"
-           CornerRadius="25"
-           BackgroundColor="#FBFBFB">
-        <Button HorizontalOptions="Center"
-                FontSize="20"
-                BackgroundColor="Transparent"
-                Text="Создать"
-                TextColor="Black"
-                Command="{Binding OpenBeautyTechPopupCommand}"
-                CommandParameter="{Binding NewSpecialist}"/>
-    </Frame>
+    
 </Grid>
 
 </ContentPage>

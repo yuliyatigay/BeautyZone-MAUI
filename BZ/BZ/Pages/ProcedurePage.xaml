@@ -34,36 +34,52 @@
                                 <SwipeView.RightItems>
                                     <SwipeItems Mode="Reveal">
                                         <SwipeItemView>
-                                            <Button  Text="Удалить" BackgroundColor="Red" Margin="2" CornerRadius="25"
+                                            <Button  Text="Удалить" 
+                                                     BackgroundColor="Red" 
+                                                     Margin="2" 
+                                                     CornerRadius="10"
                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProcedureViewModel}},
                                                      Path=DeleteCommand}"
                                                      CommandParameter="{Binding .}" />
                                         </SwipeItemView>
                                     </SwipeItems>
                                 </SwipeView.RightItems>
-                                <Frame Margin="10" Padding="25" CornerRadius="25" BackgroundColor="#FBFBFB">
-                                    <Label HorizontalOptions="Center" FontSize="20"
-                                           Text="{Binding Name}"
-                                           TextColor="Black"/>
-                                </Frame>
+                                <Border Stroke="LightGray"
+                                        StrokeThickness="1"
+                                        HeightRequest="80"
+                                        VerticalOptions="Center"
+                                        StrokeShape="RoundRectangle 10"
+                                        Margin="20,5"
+                                        Padding="10">
+                                    <Label  FontSize="20"
+                                            VerticalOptions="Center"
+                                            Margin="20, 0"
+                                            Text="{Binding Name}"/>
+                                </Border>
                             </SwipeView>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
+                    <CollectionView.Footer>
+                        <Button Text="+"
+                                FontSize="32"
+                                WidthRequest="60"
+                                HeightRequest="60"
+                                CornerRadius="30"
+                                Padding="0"
+                                Margin="20"
+                                HorizontalOptions="Center"
+                                BackgroundColor="#FBFBFB"
+                                TextColor="Black"
+                                Command="{Binding OpenProcedurePopupCommand}"
+                                CommandParameter="{Binding NewProcedure}" />
+                    </CollectionView.Footer>
                 </CollectionView>
             </RefreshView>
-            
-            <Frame VerticalOptions="End" Margin="10" Padding="25" CornerRadius="25" BackgroundColor="#FBFBFB">
-                <Button HorizontalOptions="Center" FontSize="20" BackgroundColor="Transparent"
-                        Text="Создать" TextColor="Black" 
-                        Command="{Binding OpenProcedurePopupCommand}"
-                        CommandParameter="{Binding NewProcedure}"/>
-            </Frame>
             
         </VerticalStackLayout>
         
         
         
-        <!-- Overlay loader (центр экрана) -->
         <Grid Grid.RowSpan="2"
           IsVisible="{Binding IsLoading}"
           BackgroundColor="#D2E0FB"

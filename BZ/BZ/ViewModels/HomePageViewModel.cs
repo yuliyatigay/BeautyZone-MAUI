@@ -23,7 +23,7 @@ public partial class HomePageViewModel : ObservableObject
     {
         await _authService.FetchUserSession();
 
-        if (_authService.UserSession is null)
+        if (_authService.UserSession.ExpiryTime <= DateTime.UtcNow)
         {
             await Shell.Current.GoToAsync($"//LoginPage");
         }

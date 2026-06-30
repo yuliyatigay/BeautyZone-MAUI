@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,4 +38,10 @@ public partial class CustomerPage : ContentPage
 
         ((CollectionView)sender).SelectedItem = null;
     }
+
+    private void SearchBar_TextChanged(object? sender, TextChangedEventArgs e)
+    {
+       viewModel.SearchCustomers(e.NewTextValue);
+    }
+
 }

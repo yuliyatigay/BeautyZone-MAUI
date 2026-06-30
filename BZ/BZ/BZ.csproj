@@ -59,6 +59,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.60" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
 		<PackageReference Include="Microsoft.NET.ILLink.Tasks" Version="10.0.6" />
+		<PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
 		<PackageReference Include="Syncfusion.Maui.Inputs" Version="33.2.8" />
 		<PackageReference Include="UXDivers.Popups.Maui" Version="0.9.4" />
 	</ItemGroup>

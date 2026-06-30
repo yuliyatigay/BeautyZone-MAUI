@@ -5,14 +5,10 @@
     x:Class="BZ.Pages.Popups.BeautyTechFormPopup"
     x:Name="PopupRoot">
 
-    <Frame
-        Padding="0"
-        CornerRadius="16"
-        BackgroundColor="White"
-        HasShadow="True"
-        WidthRequest="320">
-
-        <ScrollView>
+    
+        <ScrollView  Padding="0"
+                 BackgroundColor="White"
+                 WidthRequest="320">
             <VerticalStackLayout Spacing="16" Padding="20">
 
                 <Grid Padding="0">
@@ -93,5 +89,4 @@
 
             </VerticalStackLayout>
         </ScrollView>
-    </Frame>
 </toolkit:Popup>

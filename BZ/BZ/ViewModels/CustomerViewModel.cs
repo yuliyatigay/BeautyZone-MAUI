@@ -14,6 +14,7 @@ public partial class CustomerViewModel : ObservableObject
     private readonly IProcedureService _procedureService;
     [ObservableProperty]
     private ObservableCollection<Customer> customers= new();
+    private ObservableCollection<Customer> allCustomers;
 
     [ObservableProperty] 
     private Customer newCustomer = new();
@@ -33,7 +34,9 @@ public partial class CustomerViewModel : ObservableObject
         {
             IsLoading = true;
             var list = await _customerService.GetAllCustomers();
+            allCustomers = new ObservableCollection<Customer>(list);
             Customers = new ObservableCollection<Customer>(list);
+            
         }
         finally
         {
@@ -68,8 +71,7 @@ public partial class CustomerViewModel : ObservableObject
     [RelayCommand]
     public async Task OpenCustomerPopup(Customer customer)
     {
-
-        var popup = new CustomerFormPopup(customer, async edited=>Submit(edited));
+        var popup = new CustomerFormPopup(customer ,async edited=>Submit(edited));
             
         await Shell.Current.CurrentPage.ShowPopupAsync(popup);
     }
@@ -112,4 +114,28 @@ public partial class CustomerViewModel : ObservableObject
             await Refresh();
         }
     }
+
+    public void SearchCustomers(string filterText)
+    {
+        if (string.IsNullOrWhiteSpace(filterText))
+        {
+            Customers = new ObservableCollection<Customer>(allCustomers);
+            return;
+        }
+
+        var searched = allCustomers
+            .Where(x =>
+                (!string.IsNullOrWhiteSpace(x.Name) &&
+                 x.Name.Contains(filterText, StringComparison.OrdinalIgnoreCase))
+                ||
+                (!string.IsNullOrWhiteSpace(x.PhoneNumber) &&
+                 x.PhoneNumber.Contains(filterText))).ToList();
+        
+        Customers = new ObservableCollection<Customer>(searched);
+    }
+}
+public partial class PhonePickerItem : ObservableObject
+{
+    [ObservableProperty]
+    private string? selectedPhone;
 }
